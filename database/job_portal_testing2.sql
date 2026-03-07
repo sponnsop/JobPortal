@@ -11,7 +11,7 @@
  Target Server Version : 100432
  File Encoding         : 65001
 
- Date: 05/03/2026 05:48:39
+ Date: 07/03/2026 07:35:07
 */
 
 SET NAMES utf8mb4;
@@ -186,12 +186,13 @@ CREATE TABLE `employer_profiles`  (
   UNIQUE INDEX `user_id`(`user_id`) USING BTREE,
   UNIQUE INDEX `company_slug`(`company_slug`) USING BTREE,
   CONSTRAINT `fk_ep_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of employer_profiles
 -- ----------------------------
 INSERT INTO `employer_profiles` VALUES (1, 3, 'Space X', '', NULL, 'Moon Landing', 'Rocket', '1-10', NULL, '', 'logo_3_1772660853.jpg', NULL, 'Siem Reap', NULL, NULL, NULL, NULL, 0, '2026-03-05 03:31:47', '2026-03-05 04:47:33');
+INSERT INTO `employer_profiles` VALUES (3, 5, 'Apple', 'apple-5', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 'London', NULL, NULL, NULL, NULL, 0, '2026-03-07 06:54:34', '2026-03-07 06:54:34');
 
 -- ----------------------------
 -- Table structure for job_seeker_profiles
@@ -306,7 +307,7 @@ CREATE TABLE `jobs`  (
 -- ----------------------------
 -- Records of jobs
 -- ----------------------------
-INSERT INTO `jobs` VALUES (1, 1, 1, 'Web Developer', '', 'Mlbb Pro player', 'Big cock', 'Nice', '', 'remote', '', 'Siem Reap', 'Cambodia', 100.00, 500.00, 'USD', 'yearly', 1, 1, NULL, 'active', 1, NULL, 1, '2026-03-04 20:15:58', '2026-03-04 20:47:49', '2026-03-12');
+INSERT INTO `jobs` VALUES (1, 1, 1, 'Web Developer', '', 'Mlbb Pro player', 'Big cock', 'Nice', '', 'remote', '', 'Siem Reap', 'Cambodia', 100.00, 500.00, 'USD', 'yearly', 1, 1, NULL, 'active', 1, NULL, 2, '2026-03-04 20:15:58', '2026-03-07 05:19:52', '2026-03-12');
 INSERT INTO `jobs` VALUES (7, 1, 1, 'IT Support', 'it-support', 'Jes Vai computer', 'Kak', 'yes', '', 'remote', '', 'Siem Reap', 'Cambodia', 456.00, 6767.00, 'USD', 'yearly', 1, 1, NULL, 'active', 1, 'job_1772633290_524.png', 8, '2026-03-04 21:08:11', '2026-03-05 03:21:53', '2026-03-13');
 INSERT INTO `jobs` VALUES (8, 1, 12, 'asdas', 'asdas', 'sdasd', 'asdasd', 'adsasd', '', 'hybrid', '', 'Siem Reap', 'Cambodia', 23.00, 232.00, 'USD', 'yearly', 1, 1, NULL, 'active', 0, '', 1, '2026-03-05 04:49:04', '2026-03-05 04:49:30', '2026-03-20');
 INSERT INTO `jobs` VALUES (9, 3, 2, 'sdsd', 'sdsd', 'ttgrg', 'erfe', 'rfrferf', '', '', '', 'Siem Reap', 'Cambodia', 555.00, 55555.00, 'USD', 'yearly', 1, 1, NULL, 'active', 0, '', 3, '2026-03-05 04:50:12', '2026-03-05 05:18:56', '2026-04-09');
@@ -443,6 +444,7 @@ CREATE TABLE `users`  (
   `password_hash` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `role` enum('job_seeker','employer','admin') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'job_seeker',
   `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `approval_status` enum('pending','approved','rejected') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'approved',
   `email_verified` tinyint(1) NOT NULL DEFAULT 0,
   `verify_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `reset_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
@@ -451,13 +453,15 @@ CREATE TABLE `users`  (
   `updated_at` datetime(0) NOT NULL DEFAULT current_timestamp(0) ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `email`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, 'admin@jobportal.com', NULL, NULL, '$2y$10$uAFaLaS9MpcvbpQrC65pWOtLd0FBD0IESzhMKfb9.1dqLgkycWzAa', 'admin', 1, 1, NULL, NULL, NULL, '2026-03-04 03:23:52', '2026-03-04 04:39:00');
-INSERT INTO `users` VALUES (3, 'spacex@gmail.com', 'Elon Mask', '', '$2y$10$/D4DUm3cHPZ2SHorjWFqLOviXU6wsUwkj.t.9Ayk95OEAgBFckLZq', 'employer', 1, 0, NULL, NULL, NULL, '2026-03-05 03:31:47', '2026-03-05 04:42:41');
+INSERT INTO `users` VALUES (1, 'admin@jobportal.com', NULL, NULL, '$2y$10$uAFaLaS9MpcvbpQrC65pWOtLd0FBD0IESzhMKfb9.1dqLgkycWzAa', 'admin', 1, 'approved', 1, NULL, NULL, NULL, '2026-03-04 03:23:52', '2026-03-04 04:39:00');
+INSERT INTO `users` VALUES (3, 'spacex@gmail.com', 'Elon Mask', '', '$2y$10$/D4DUm3cHPZ2SHorjWFqLOviXU6wsUwkj.t.9Ayk95OEAgBFckLZq', 'employer', 1, 'approved', 0, NULL, NULL, NULL, '2026-03-05 03:31:47', '2026-03-05 04:42:41');
+INSERT INTO `users` VALUES (4, 'jonsnow@gmail.com', 'Jon Snow', NULL, '$2y$10$N5jOC3yH0MgfSoV5X4GAjup5jVot5m9G/7tHF4hYQa.FBjjax5zjO', 'employer', 0, 'pending', 0, NULL, NULL, NULL, '2026-03-07 06:48:01', '2026-03-07 06:48:01');
+INSERT INTO `users` VALUES (5, 'jonsnow88@gmail.com', 'Jon Snow', NULL, '$2y$10$A.6GJw4JY5.QPknuL/giLuOqe1ZDWD1pznrqQ5LDk.3QCVvL3pU6W', 'employer', 0, 'pending', 0, NULL, NULL, NULL, '2026-03-07 06:54:34', '2026-03-07 06:54:34');
 
 -- ----------------------------
 -- Table structure for work_experience
