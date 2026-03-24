@@ -20,4 +20,4 @@ class Admin_ApplicationAdminController extends Controller {
     }
 }
 
-Pong Kdor
+
