@@ -11,8 +11,12 @@ define('SITE_EMAIL', 'contact@company.com');
 
 $protocol  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
 $host      = $_SERVER['HTTP_HOST'];
-$base      = dirname(dirname($_SERVER['SCRIPT_NAME']));
-$base      = rtrim($base, '/');
+
+$scriptName = $_SERVER['SCRIPT_NAME'];          // assign to variable first
+$parentDir  = dirname($scriptName);             // /mvc/JobPortal/public
+$base       = dirname($parentDir);              // /mvc/JobPortal
+$base       = rtrim($base, '/');
+
 define('SITE_URL', $protocol . '://' . $host . $base . '/public');
 
 define('JSEARCH_API_KEY', '');        // your API key
