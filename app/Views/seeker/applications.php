@@ -192,7 +192,7 @@
 
                                 <td>
                                     <strong style="color: #334155; display:block; margin-bottom: 2px;"><?= htmlspecialchars($app['job_title']) ?></strong>
-                                    <a href="<?= SITE_URL ?>/jobs/view/<?= $app['job_id'] ?? 0 ?>" style="color: #3b82f6; font-size: 13px; text-decoration: none;">View job</a>
+                                    <a href="<?= SITE_URL ?>/jobs/<?= $app['job_id'] ?? 0 ?>" style="color: #3b82f6; font-size: 13px; text-decoration: none;">View job</a>
                                 </td>
 
                                 <td><?= htmlspecialchars($app['company_name'] ?? 'Company Name') ?></td>
@@ -229,7 +229,7 @@
                                 <td>
                                     <a href="#" class="action-btn"><i class="fa fa-download"></i> Resume</a>
 
-                                    <a href="<?= SITE_URL ?>/jobs/view/<?= $app['job_id'] ?? 0 ?>" class="action-btn"><i class="fa fa-eye"></i> View</a>
+                                    <a href="" class="action-btn"><i class="fa fa-eye"></i> View</a>
 
                                     <?php if (in_array($status, ['submitted', 'reviewing', 'shortlisted'])): ?>
                                         <form action="<?= SITE_URL ?>/applications/cancel/<?= $app['id'] ?>" method="POST" onsubmit="return confirm('Are you sure you want to withdraw this application?');" style="display:inline;">

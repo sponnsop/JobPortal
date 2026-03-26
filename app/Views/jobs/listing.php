@@ -266,7 +266,7 @@
                                         <span class="job-type-badge">
                                              <?= htmlspecialchars(ucfirst(str_replace('_', ' ', $job['job_type'] ?? 'Full-Time'))) ?>
                                         </span>
-                                        <a href="<?= SITE_URL ?>/jobs/view/<?= $job['id'] ?>" class="view-job-btn">View Details</a>
+                                        <a href="<?= SITE_URL ?>/jobs/<?= $job['id'] ?>" class="view-job-btn">View Details</a>
                                    </div>
 
                               </div>
